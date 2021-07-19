@@ -10,7 +10,7 @@ public class BulletinBoard {
 		System.out.println("===프로그램 시작===");
 
 		Scanner sc = new Scanner(System.in);
-		
+
 		int lastArticleId = 0;
 
 		List<Article> articles = new ArrayList<>(); // 저장장치 생성
@@ -39,14 +39,16 @@ public class BulletinBoard {
 
 				System.out.printf("%d번 글이 생성되었습니다.\n", id);
 			} else if (command.equals("article list")) {
-
-				for (int i = 0; i < articles.size(); i++) {
-					Article article = articles.get(i);
-					if (lastArticleId > 0) {
+				if (articles.size() == 0) {
+					System.out.println("게시물이 없습니다.");
+					continue;
+				} else {
+					System.out.println("순번. 제목");
+					for (int i = articles.size() - 1; i >= 0; i--) { // 최신글이 위에 올라오게 해야 함 => 배열에서 역순으로 정보를 가져와야 함
+						Article article = articles.get(i);
 						System.out.println(article.id + ". " + article.title);
-					} else {
-						System.out.println("게시물이 없습니다.");
 					}
+
 				}
 			} else {
 				System.out.printf("%s는(은) 존재하지 않는 명령어입니다.\n", command);
